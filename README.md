@@ -1,8 +1,6 @@
-# QA API Glossary
+# QA API Testing
 
-Glossário prático de API REST, HTTP, Postman e testes de API, criado para estudo, consulta e prática em QA.
-
-O objetivo é ajudar quem está começando a entender APIs e transformar os conceitos aprendidos em testes práticos.
+Guia prático de APIs, Postman e testes para QA.
 
 ---
 
