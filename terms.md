@@ -1,6 +1,6 @@
 # Termos de API e QA
 
-Dicionário de consulta rápida sobre **API, HTTP, Postman e testes de software**.
+Dicionário de consulta rápida sobre API, HTTP, Postman e testes de software.
 
 ---
 
@@ -14,7 +14,7 @@ Conjunto de regras que permite a comunicação entre sistemas ou componentes.
 
 ### API REST
 
-Estilo arquitetural utilizado para construção de serviços web baseado, entre outros princípios, nos recursos e no protocolo HTTP.
+Estilo arquitetural utilizado para construção de serviços web utilizando recursos e conceitos do protocolo HTTP.
 
 ### Endpoint
 
@@ -44,9 +44,7 @@ Identificador utilizado para identificar um recurso.
 
 ### JSON
 
-Formato de dados utilizado com frequência na comunicação entre APIs.
-
-Exemplo:
+Formato de dados frequentemente utilizado na comunicação entre APIs.
 
 ```json
 {
@@ -61,7 +59,7 @@ Exemplo:
 
 ### HTTP
 
-Protocolo utilizado para comunicação entre clientes e servidores na web.
+Protocolo utilizado para comunicação entre clientes e servidores.
 
 ### GET
 
@@ -69,11 +67,11 @@ Utilizado normalmente para consultar dados.
 
 ### POST
 
-Utilizado normalmente para criar um recurso ou enviar dados para processamento.
+Utilizado normalmente para criar recursos ou enviar dados para processamento.
 
 ### PUT
 
-Utilizado normalmente para substituir ou atualizar completamente um recurso.
+Utilizado normalmente para substituir ou atualizar um recurso.
 
 ### PATCH
 
@@ -85,11 +83,11 @@ Utilizado normalmente para remover um recurso.
 
 ### HEAD
 
-Semelhante ao GET, mas utilizado para obter os headers da resposta sem o conteúdo do body.
+Solicita informações semelhantes às de uma requisição GET, mas sem o conteúdo do Response Body.
 
 ### OPTIONS
 
-Utilizado para consultar as opções ou métodos suportados para um recurso.
+Permite consultar as opções ou métodos suportados por um recurso.
 
 ---
 
@@ -112,19 +110,9 @@ Pode conter:
 
 Dados enviados no corpo da requisição.
 
-Exemplo:
-
-```json
-{
-  "name": "Erica"
-}
-```
-
 ### Query Parameter
 
-Parâmetro enviado na URL após `?`.
-
-Exemplo:
+Parâmetro enviado na URL.
 
 ```text
 /users?status=active
@@ -134,25 +122,13 @@ Exemplo:
 
 Valor utilizado como parte do caminho do recurso.
 
-Exemplo:
-
 ```text
 /users/123
 ```
 
-Nesse caso:
-
-```text
-123
-```
-
-é o identificador do usuário.
-
 ### Header
 
-Informação enviada nos cabeçalhos da requisição ou resposta.
-
-Exemplo:
+Informação enviada no cabeçalho da requisição ou resposta.
 
 ```text
 Content-Type: application/json
@@ -176,15 +152,6 @@ Pode conter:
 
 Conteúdo retornado pela API.
 
-Exemplo:
-
-```json
-{
-  "id": 1,
-  "name": "Erica"
-}
-```
-
 ### Response Header
 
 Informações adicionais enviadas nos cabeçalhos da resposta.
@@ -192,12 +159,6 @@ Informações adicionais enviadas nos cabeçalhos da resposta.
 ---
 
 # 5. Status Codes
-
-Os códigos HTTP indicam o resultado geral de uma requisição.
-
-## 1xx — Informativo
-
-Indica informações relacionadas ao processamento da requisição.
 
 ## 2xx — Sucesso
 
@@ -211,19 +172,17 @@ Recurso criado com sucesso.
 
 ### 202 Accepted
 
-Requisição aceita para processamento, sem indicar necessariamente que o processamento foi concluído.
+Requisição aceita para processamento.
 
 ### 204 No Content
 
-Requisição processada com sucesso, sem conteúdo no Response Body.
+Requisição processada com sucesso sem conteúdo no Response Body.
 
 ## 3xx — Redirecionamento
 
 Indica que são necessárias ações adicionais para completar a requisição.
 
 ## 4xx — Erro do cliente
-
-Indica que existe algum problema relacionado à requisição.
 
 ### 400 Bad Request
 
@@ -243,23 +202,21 @@ Recurso não encontrado.
 
 ### 405 Method Not Allowed
 
-O método HTTP utilizado não é permitido para o recurso.
+Método HTTP não permitido para o recurso.
 
 ### 409 Conflict
 
-A requisição entra em conflito com o estado atual do recurso.
+Conflito com o estado atual do recurso.
 
 ### 422 Unprocessable Content
 
-A requisição possui estrutura compreensível, mas não pode ser processada devido aos dados enviados ou às regras aplicadas.
+A requisição é compreensível, mas os dados não podem ser processados.
 
 ### 429 Too Many Requests
 
-Muitas requisições foram realizadas em determinado período ou limite.
+Limite de requisições excedido.
 
 ## 5xx — Erro do servidor
-
-Indica falha no processamento pelo servidor.
 
 ### 500 Internal Server Error
 
@@ -267,7 +224,7 @@ Erro interno do servidor.
 
 ### 502 Bad Gateway
 
-Um servidor atuando como gateway ou proxy recebeu uma resposta inválida de outro servidor.
+Resposta inválida recebida por um gateway ou proxy.
 
 ### 503 Service Unavailable
 
@@ -275,7 +232,7 @@ Serviço temporariamente indisponível.
 
 ### 504 Gateway Timeout
 
-O servidor atuando como gateway ou proxy não recebeu uma resposta dentro do tempo esperado.
+O gateway ou proxy não recebeu uma resposta dentro do tempo esperado.
 
 ---
 
@@ -283,21 +240,19 @@ O servidor atuando como gateway ou proxy não recebeu uma resposta dentro do tem
 
 ### Authentication
 
-Processo utilizado para verificar a identidade de quem está realizando uma requisição.
+Processo utilizado para verificar a identidade de quem realiza uma requisição.
 
 ### Authorization
 
-Processo utilizado para determinar se uma identidade autenticada possui permissão para executar determinada ação.
+Processo utilizado para determinar quais ações uma identidade autenticada pode executar.
 
 ### API Key
 
-Chave utilizada para identificar ou autorizar o acesso a uma API.
+Chave utilizada para identificação ou autorização de acesso a uma API.
 
 ### Bearer Token
 
 Token enviado normalmente no header `Authorization`.
-
-Exemplo:
 
 ```text
 Authorization: Bearer <token>
@@ -305,7 +260,7 @@ Authorization: Bearer <token>
 
 ### Basic Authentication
 
-Método de autenticação baseado em usuário e senha enviados em uma credencial codificada.
+Método de autenticação baseado em usuário e senha.
 
 ---
 
@@ -313,51 +268,29 @@ Método de autenticação baseado em usuário e senha enviados em uma credencial
 
 ### Postman
 
-Ferramenta utilizada para criar, enviar e testar requisições de APIs.
+Ferramenta utilizada para criar, enviar, organizar e testar requisições de APIs. O Postman suporta diferentes protocolos, incluindo HTTP.
 
 ### Collection
 
 Conjunto organizado de requisições.
 
-Exemplo:
-
-```text
-Usuários
-├── Criar
-├── Consultar
-├── Alterar
-└── Excluir
-```
+Collections também podem conter scripts, variáveis, autenticação, exemplos e testes.
 
 ### Environment
 
-Conjunto de variáveis utilizadas para representar configurações de determinado ambiente.
-
-Exemplo:
-
-```text
-base_url
-token
-user_id
-```
+Conjunto de variáveis utilizado para representar configurações de determinado ambiente.
 
 ### Variable
 
-Valor reutilizável dentro de requisições, scripts ou ambientes.
-
-Exemplo:
-
-```text
-{{base_url}}
-```
+Valor reutilizável em requisições, scripts ou ambientes.
 
 ### Collection Runner
 
-Recurso utilizado para executar várias requisições de uma Collection.
+Recurso utilizado para executar requisições de uma Collection.
 
 ### Script
 
-Código executado no contexto de uma requisição ou Collection para automatizar comportamentos e validações.
+Código JavaScript utilizado para adicionar lógica, preparar requisições ou validar respostas.
 
 ### Teste no Postman
 
@@ -371,10 +304,6 @@ pm.test("Status esperado", function () {
 });
 ```
 
-### Mock Server
-
-Recurso que simula o comportamento de uma API para permitir testes e desenvolvimento sem depender do servidor real.
-
 ---
 
 # 8. Testes de API
@@ -383,24 +312,13 @@ Recurso que simula o comportamento de uma API para permitir testes e desenvolvim
 
 Processo de verificar se uma API funciona conforme o comportamento esperado.
 
-Pode envolver validação de:
-
-* Request;
-* Response;
-* Status Code;
-* Headers;
-* Body;
-* regras de negócio;
-* autenticação;
-* integrações.
-
 ### Teste positivo
 
-Valida o comportamento esperado utilizando dados válidos.
+Utiliza dados válidos e condições esperadas.
 
 ### Teste negativo
 
-Valida o comportamento da aplicação diante de dados inválidos ou condições não esperadas.
+Utiliza dados inválidos ou condições que devem ser tratadas pela aplicação.
 
 ### Teste funcional
 
@@ -412,23 +330,73 @@ Verifica a comunicação entre componentes, serviços ou sistemas.
 
 ### Teste de regressão
 
-Verifica se alterações realizadas não introduziram problemas em comportamentos existentes.
+Verifica se alterações não introduziram problemas em funcionalidades existentes.
 
 ### Teste ponta a ponta
 
-Valida um fluxo completo da aplicação envolvendo múltiplos componentes ou endpoints.
+Valida um fluxo completo envolvendo diferentes componentes.
 
 ### Teste de contrato
 
-Verifica se a comunicação entre sistemas respeita o contrato definido para a API.
+Verifica se a comunicação entre sistemas segue o contrato definido para a API.
 
 ### Teste de desempenho
 
-Avalia o comportamento da API sob diferentes condições de carga, considerando métricas como tempo de resposta, volume e disponibilidade.
+Avalia o comportamento da API sob diferentes condições de carga.
 
 ---
 
-# 9. Conceitos de teste
+# 9. Integração
+
+### Integração
+
+Comunicação entre componentes ou sistemas.
+
+```text
+Frontend
+   ↓
+API
+   ↓
+Serviço externo
+   ↓
+Banco de dados
+```
+
+### Webhook
+
+Mecanismo pelo qual um sistema envia uma notificação para outro quando determinado evento ocorre.
+
+### Timeout
+
+Situação em que uma operação não recebe resposta dentro do período esperado.
+
+### Retry
+
+Nova tentativa de executar uma operação após uma falha.
+
+### Idempotência
+
+Propriedade na qual repetir determinada operação produz o mesmo efeito final, quando aplicável.
+
+---
+
+# 10. Documentação de API
+
+### Swagger
+
+Ferramentas e interfaces associadas ao ecossistema OpenAPI, frequentemente utilizadas para documentar e explorar APIs.
+
+### OpenAPI
+
+Especificação utilizada para descrever APIs HTTP, incluindo operações, parâmetros, respostas e outros elementos do contrato.
+
+### Contrato da API
+
+Definição do comportamento esperado da interface entre sistemas.
+
+---
+
+# 11. Conceitos de QA
 
 ### Cenário de teste
 
@@ -440,7 +408,7 @@ Conjunto de condições, dados, passos e resultados esperados utilizados para va
 
 ### Resultado esperado
 
-Comportamento que deveria ocorrer durante a execução.
+Comportamento que deveria ocorrer.
 
 ### Resultado obtido
 
@@ -452,20 +420,12 @@ Registro utilizado para demonstrar o resultado da execução.
 
 Exemplos:
 
-* captura de tela;
 * Request;
 * Response;
 * log;
-* relatório;
-* vídeo.
-
-### Caso positivo
-
-Cenário em que os dados e condições atendem ao comportamento esperado.
-
-### Caso negativo
-
-Cenário em que dados inválidos, incompletos ou condições específicas são utilizados para verificar o tratamento da aplicação.
+* captura de tela;
+* vídeo;
+* relatório.
 
 ### Caso de borda
 
@@ -483,70 +443,33 @@ Limite: 160 caracteres
 
 ---
 
-# 10. Integração
+# 12. Automação
 
-### Integração
+### Automação de testes
 
-Comunicação entre componentes ou sistemas.
+Uso de ferramentas e scripts para executar validações automaticamente.
 
-Exemplo:
+### CI
 
-```text
-Frontend
-   ↓
-API
-   ↓
-Serviço externo
-   ↓
-Banco de dados
-```
+Continuous Integration.
 
-### Webhook
+Prática de integrar alterações frequentemente e executar verificações automatizadas.
 
-Mecanismo pelo qual um sistema envia uma notificação para outro sistema quando determinado evento ocorre.
+### CD
 
-### Timeout
+Continuous Delivery ou Continuous Deployment, dependendo do contexto.
 
-Situação em que uma operação não recebe resposta dentro do período esperado.
+### Pipeline
 
-### Retry
+Sequência automatizada de etapas como build, teste e entrega.
 
-Nova tentativa de executar uma operação após uma falha.
+### GitHub Actions
 
-### Idempotência
-
-Propriedade em que repetir determinada operação produz o mesmo efeito final, quando aplicável.
+Recurso do GitHub utilizado para automatizar workflows, incluindo execução de testes.
 
 ---
 
-# 11. Documentação de API
-
-### Swagger
-
-Ferramentas e interfaces associadas ao ecossistema OpenAPI, frequentemente utilizadas para documentar e explorar APIs.
-
-### OpenAPI
-
-Especificação padronizada para descrever APIs HTTP de forma que pessoas e ferramentas possam compreender suas operações, parâmetros, respostas e outros elementos do contrato.
-
-### Contrato da API
-
-Definição do comportamento esperado da interface entre sistemas.
-
-Pode especificar:
-
-* endpoints;
-* métodos;
-* parâmetros;
-* headers;
-* autenticação;
-* Request;
-* Response;
-* códigos de resposta.
-
----
-
-# 12. Boas práticas
+# 13. Boas práticas
 
 ### Validação de Request
 
@@ -554,10 +477,9 @@ Verifique se o cliente envia exatamente os dados esperados.
 
 ### Validação de Response
 
-Não valide somente o código HTTP.
+Valide:
 
-Verifique também:
-
+* Status Code;
 * estrutura;
 * campos;
 * valores;
@@ -566,7 +488,7 @@ Verifique também:
 
 ### Cenários negativos
 
-Sempre que aplicável, teste:
+Teste:
 
 * dados inválidos;
 * dados ausentes;
@@ -589,51 +511,13 @@ Não versionar:
 
 Utilize Collections, variáveis e scripts para reduzir repetição.
 
-### Evidências
-
-Registre informações suficientes para reproduzir e investigar o resultado.
-
-### Automação
-
-Automatize testes repetitivos e relevantes.
-
 ### Regressão
 
 Execute novamente os testes impactados por alterações.
 
 ---
 
-# 13. Termos relacionados a automação
-
-### Automação de testes
-
-Uso de ferramentas e scripts para executar validações automaticamente.
-
-### CI
-
-Continuous Integration.
-
-Prática de integrar alterações frequentemente e executar verificações automatizadas.
-
-### CD
-
-Continuous Delivery ou Continuous Deployment, dependendo do contexto.
-
-Relaciona-se à automação das etapas de entrega e implantação.
-
-### Pipeline
-
-Sequência automatizada de etapas executadas durante processos como build, teste e entrega.
-
-### GitHub Actions
-
-Recurso de automação do GitHub utilizado para executar workflows, incluindo testes automatizados.
-
----
-
-# 14. Checklist rápido para testes de API
-
-Antes de finalizar um teste, verifique:
+# 14. Checklist rápido
 
 ```text
 [ ] Endpoint correto
@@ -650,13 +534,3 @@ Antes de finalizar um teste, verifique:
 [ ] Dados sensíveis protegidos
 [ ] Regressão considerada
 ```
-
----
-
-# Referências
-
-* Postman — [Documentação oficial](https://learning.postman.com/docs/)
-* Postman — [Testes de API](https://learning.postman.com/docs/tests-and-scripts/test-apis/test-apis/)
-* Postman — [Execução e automação de testes](https://learning.postman.com/docs/tests-and-scripts/run-tests/run-tests)
-* Postman — [Testes de integração](https://learning.postman.com/docs/tests-and-scripts/test-apis/integration-testing/)
-* OpenAPI — [Especificação oficial](https://spec.openapis.org/oas/latest.html)
