@@ -1,352 +1,52 @@
-# QA API Testing
+# Da Entrega ao Teste — Triagem para QA
 
-Guia prático de APIs, Postman e testes para QA.
+Ferramenta web autocontida que transforma o texto (ou PDF/imagens) de uma entrega — user story, card, ticket, funcionalidade — em triagem estruturada, cenários de teste, código de automação pronto e manual de usuário, usando IA.
 
----
+Arquivo único em HTML/JS, sem backend, sem instalação. Abre direto no navegador.
 
-## Objetivo
+## O que ela faz
 
-Este projeto funciona como um guia de aprendizado para:
+1. **Entrada** — cole o texto da entrega e/ou anexe um PDF e imagens (prints, mockups). Se o conteúdo tiver mais de um item de entrega (vários cards no mesmo documento), cada um é identificado separadamente.
+2. **Triagem** — quebra cada item em descrição, critérios de aceite, impactos, pontos de atenção e dados insuficientes. Dá pra reformular item por item antes de seguir.
+3. **Cenários** — gera checklist e cenários Gherkin por item. Para itens de chatbot de IA ou app mobile, gera antes um guia de preparação de ambiente (pré-requisitos, passos, o que pedir a quem solicitou o teste). Também gera sob demanda código pronto (não executa nada sozinho) de:
+   - **Cypress** — automação de interface
+   - **Postman** — validação de API
+   - **k6** — teste de performance
+4. **Manual** — gera um manual do usuário por item, em linguagem de usuário final, pronto para virar artigo de base de conhecimento.
 
-* entender APIs;
-* interpretar Requests e Responses;
-* conhecer os principais métodos HTTP;
-* entender Status Codes;
-* utilizar o Postman;
-* criar cenários de teste;
-* testar cenários positivos e negativos;
-* analisar erros;
-* aplicar boas práticas de QA;
-* praticar testes em APIs públicas.
+Também exporta checklist + Gherkin de todos os itens gerados em uma planilha `.xlsx`.
 
----
+## Como usar
 
-## Como estudar
+Basta abrir o arquivo `qa_triagem.html` em qualquer navegador. Não precisa de servidor, instalação nem configuração — dentro do ambiente do Claude funciona direto.
 
-A recomendação é seguir uma sequência:
+## Publicando no GitHub Pages
 
-```text
-Fundamentos de API
-        ↓
-HTTP
-        ↓
-Request e Response
-        ↓
-Status Codes
-        ↓
-Postman
-        ↓
-Testes positivos e negativos
-        ↓
-Testes de integração
-        ↓
-Automação
-```
+1. Suba o arquivo `qa_triagem.html` para um repositório (pode ser o único arquivo, ou renomeie para `index.html`).
+2. Em **Settings → Pages**, selecione a branch e a pasta onde o arquivo está.
+3. Acesse a URL gerada pelo GitHub Pages.
 
-Consulte o arquivo [`terms.md`](./terms.md) sempre que encontrar um termo desconhecido.
+### Sobre a chave de API
 
-Para o estudo específico de Postman, consulte [`postman.md`](./postman.md).
+Fora do ambiente do Claude, cada chamada de IA precisa de autenticação própria. Ao abrir a ferramenta publicada, clique no ícone ⚙️ no menu lateral e cole uma chave de API da Anthropic (gerada em [console.anthropic.com](https://console.anthropic.com)).
 
----
+- A chave fica salva **apenas no navegador de quem está usando** (`sessionStorage`), nunca é enviada a nenhum lugar além da própria API da Anthropic.
+- Cada pessoa que for usar a ferramenta publicada precisa da própria chave — não há uma chave compartilhada embutida no código.
 
-## Laboratório prático
+## Privacidade e escopo
 
-Depois de estudar os conceitos, pratique utilizando APIs públicas.
+- A ferramenta **não se conecta a nenhum sistema, API ou ferramenta interna**. A única chamada de rede é direto do navegador para `api.anthropic.com`.
+- O código gerado para Cypress/Postman/k6 é sempre estático — usa placeholders comentados no lugar de URLs, seletores e endpoints reais. Nada é executado ou disparado automaticamente.
+- Não há armazenamento em nuvem: todo o processamento acontece na sessão do navegador. Fechou a aba, perdeu o progresso (exceto a chave de API, que fica salva para a próxima sessão).
 
-### Postman Echo
+## Estrutura técnica
 
-O Postman Echo é uma API disponibilizada pelo próprio Postman para testar requisições. O serviço retorna informações sobre a requisição enviada e é utilizado na documentação oficial para aprendizado.
+- Arquivo único (`qa_triagem.html`): HTML + CSS + JavaScript puro, sem build, sem dependências instaladas.
+- Biblioteca externa: [SheetJS](https://sheetjs.com/) via CDN, usada apenas para gerar o `.xlsx` de exportação.
+- Chamadas de IA feitas diretamente para a API de mensagens da Anthropic (`claude-sonnet-4-6`).
 
-Exemplo:
+## Limitações conhecidas
 
-```http
-GET https://postman-echo.com/get
-```
-
-Depois experimente:
-
-```http
-GET https://postman-echo.com/get?nome=Erica
-```
-
-Observe:
-
-* Status Code;
-* Headers;
-* URL;
-* método utilizado;
-* parâmetros;
-* dados retornados.
-
-[Postman Echo](https://learning.postman.com/docs/developer/echo-api)
-
----
-
-## Swagger Petstore
-
-O Swagger Petstore é uma API de exemplo baseada na especificação OpenAPI 3.0 e possui operações para pets, usuários e pedidos.
-
-Acesse:
-
-[Swagger Petstore](https://petstore3.swagger.io/)
-
-Pratique:
-
-```text
-POST /pet
-GET /pet/{petId}
-PUT /pet
-DELETE /pet/{petId}
-```
-
-Monte o seguinte fluxo:
-
-```text
-Criar
-  ↓
-Consultar
-  ↓
-Alterar
-  ↓
-Consultar novamente
-  ↓
-Excluir
-  ↓
-Consultar novamente
-```
-
----
-
-## Desafio final
-
-Crie uma Collection no Postman contendo:
-
-1. Criar pet;
-2. Consultar pet;
-3. Alterar pet;
-4. Consultar novamente;
-5. Excluir pet;
-6. Consultar após exclusão;
-7. Criar pelo menos um cenário negativo.
-
-Depois adicione testes automatizados para validar:
-
-* Status Code;
-* presença de campos;
-* valores;
-* tipos;
-* estrutura do Response;
-* comportamento esperado.
-
-O Postman permite organizar requisições em Collections e executar essas Collections como conjuntos de testes.
-
----
-
-## Boas práticas em testes de API
-
-### Conheça o contrato
-
-Antes de testar, entenda:
-
-* endpoint;
-* método;
-* parâmetros;
-* headers;
-* autenticação;
-* Request;
-* Response;
-* comportamento esperado.
-
-### Teste cenários positivos e negativos
-
-Inclua:
-
-* dados válidos;
-* campos obrigatórios ausentes;
-* dados inválidos;
-* formatos incorretos;
-* valores limite;
-* autenticação inválida;
-* recursos inexistentes;
-* métodos não permitidos.
-
-### Não valide somente o Status Code
-
-Um `200 OK` não garante que o comportamento esteja correto.
-
-Valide também:
-
-* Response Body;
-* Headers;
-* campos;
-* valores;
-* tipos;
-* regras de negócio;
-* mensagens;
-* comportamento esperado.
-
-### Utilize dados de teste
-
-Evite versionar:
-
-* senhas;
-* tokens;
-* chaves de API;
-* credenciais;
-* dados pessoais reais.
-
-### Utilize variáveis
-
-Exemplo:
-
-```text
-{{base_url}}
-{{token}}
-{{pet_id}}
-```
-
-### Organize as requisições
-
-Exemplo:
-
-```text
-Petstore
-├── Criar Pet
-├── Consultar Pet
-├── Alterar Pet
-├── Excluir Pet
-└── Cenários Negativos
-```
-
-### Pense em regressão
-
-Depois de uma alteração, execute novamente os testes relevantes.
-
-### Automatize testes repetitivos
-
-Quando uma validação precisa ser executada frequentemente, considere automatizá-la.
-
-O Postman permite executar Collections manualmente, agendar execuções e integrar execuções a pipelines de CI/CD.
-
----
-
-## Aplicação em QA
-
-Um teste de API não deve responder apenas:
-
-> A API respondeu?
-
-A pergunta deve ser:
-
-> A API respondeu corretamente para este cenário?
-
-Fluxo de validação:
-
-```text
-Requisito
-   ↓
-Contrato da API
-   ↓
-Request
-   ↓
-Processamento
-   ↓
-Response
-   ↓
-Validação
-   ↓
-Evidência
-   ↓
-Resultado
-```
-
----
-
-## Material complementar
-
-### Postman
-
-Para estudar o Postman de forma mais detalhada:
-
-[`postman.md`](./postman.md)
-
-[Documentação oficial do Postman](https://learning.postman.com/)
-
-### Get Started with API Testing
-
-O Postman disponibiliza uma coleção prática que trabalha scripts, encadeamento de requisições, autorização, variáveis e validação de dados.
-
-[Get Started with API Testing — Postman](https://www.postman.com/devrel/postman-community-challenge/folder/4pjyd3k/get-started-with-api-testing)
-
-### APIs para prática
-
-[Postman Echo](https://learning.postman.com/docs/developer/echo-api)
-
-[Swagger Petstore](https://petstore3.swagger.io/)
-
----
-
-## Tecnologias e ferramentas
-
-* REST
-* HTTP
-* JSON
-* Postman
-* Swagger / OpenAPI
-* Git
-* GitHub
-
----
-
-## Estrutura
-
-```text
-qa-api-glossary/
-├── README.md
-├── terms.md
-└── postman.md
-```
-
-| Arquivo      | Descrição                                   |
-| ------------ | ------------------------------------------- |
-| `README.md`  | Guia principal, laboratório e boas práticas |
-| `terms.md`   | Glossário de termos de API e QA             |
-| `postman.md` | Guia prático de estudo do Postman           |
-
----
-
-## Próximos passos
-
-Depois de concluir os exercícios:
-
-```text
-Fundamentos
-    ↓
-Postman
-    ↓
-Testes manuais
-    ↓
-Cenários negativos
-    ↓
-Testes automatizados
-    ↓
-Integração
-    ↓
-CI/CD
-    ↓
-Testes de desempenho
-```
-
-O objetivo é sair da simples execução de requisições e desenvolver a capacidade de analisar, validar e automatizar o comportamento de APIs.
-
----
-
-## Autora
-
-**Erica de Souza**
-
-QA Analyst com foco em qualidade de software, testes de API, automação e aplicações de Inteligência Artificial.
-
----
-
-> Material desenvolvido para estudo, consulta e prática de testes de API com foco em QA.
+- Cada chamada de IA tem um limite de tamanho de resposta; itens muito extensos ou anexos muito grandes podem gerar respostas cortadas — a ferramenta avisa quando isso acontece e permite tentar novamente.
+- Não faz parsing manual de PDF: o próprio modelo lê o conteúdo do arquivo anexado.
+- Cópia e download automático podem ser bloqueados por restrições do navegador; nesses casos, a ferramenta abre uma caixa de texto para copiar manualmente.
