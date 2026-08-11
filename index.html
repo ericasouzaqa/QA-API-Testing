@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QA & API Testing Hub — v1.1.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #14181c;
+        --surface: #1c2228;
+        --surface-raised: #232a31;
+        --line: #333b43;
+        --text: #e8e6df;
+        --text-dim: #9aa3ab;
+        --amber: #d4a537;
+        --amber-dim: #3a331e;
+        --teal: #4a7a6f;
+        --teal-dim: #1e2c29;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(circle at 15% 10%, #1c232b, var(--bg) 55%);
+        color: var(--text);
+        font-family: 'IBM Plex Sans', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        max-width: 900px;
+        width: 100%;
+        padding: 40px 20px;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .brand {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        color: var(--amber);
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--amber);
+      }
+      h1 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 32px;
+        margin: 0 0 12px;
+        font-weight: 700;
+      }
+      p.sub {
+        color: var(--text-dim);
+        font-size: 15px;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        gap: 20px;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .card:hover {
+        border-color: var(--amber);
+        transform: translateY(-2px);
+      }
+      .card h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 20px;
+        margin: 0 0 10px;
+      }
+      .card p {
+        color: var(--text-dim);
+        font-size: 13.5px;
+        line-height: 1.6;
+        margin: 0 0 20px;
+        flex: 1;
+      }
+      .badge-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      .badge {
+        font-size: 11px;
+        font-family: 'IBM Plex Mono', monospace;
+        padding: 3px 10px;
+        border-radius: 20px;
+        background: var(--surface-raised);
+        border: 1px solid var(--line);
+        color: var(--text-dim);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: var(--amber);
+        border: 1px solid var(--amber);
+        color: #1a1608;
+        font-weight: 600;
+        font-size: 13.5px;
+        padding: 12px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.15s;
+      }
+      .btn:hover {
+        background: #e0b247;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 12px;
+        color: var(--text-dim);
+        font-family: 'IBM Plex Mono', monospace;
+      }
+      @media (max-width: 480px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="brand">
+          <span class="dot"></span>Portfólio de QA & Automação · v1.1.0
+        </div>
+        <h1>Hub de Ferramentas e Estudos</h1>
+        <p class="sub">
+          Acesse abaixo as aplicações interativas de triagem de entregas e o
+          curso completo de automação de testes com Postman e Cypress[cite: 5,
+          6].
+        </p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2>Da Entrega ao Teste — Triagem</h2>
+          <p>
+            Ferramenta web autocontida que transforma user stories, critérios e
+            anexos (PDF/imagens) em triagem estruturada, cenários Gherkin,
+            scripts de automação e manual do usuário[cite: 6].
+          </p>
+          <div class="badge-row">
+            <span class="badge">IA Integrada</span>
+            <span class="badge">Gherkin & Cypress</span>
+            <span class="badge">Exportação .xlsx</span>
+          </div>
+          <a href="qa_triagem.html" class="btn"
+            >Abrir Ferramenta de Triagem →</a
+          >
+        </div>
+
+        <div class="card">
+          <h2>Curso de API & Automação</h2>
+          <p>
+            Trilha completa de 53 aulas distribuídas em 7 módulos cobrindo
+            fundamentos de HTTP, leitura de Swagger/DTO, Postman profissional e
+            Cypress do zero[cite: 5, 6].
+          </p>
+          <div class="badge-row">
+            <span class="badge">53 Aulas Interativas</span>
+            <span class="badge">Postman & Cypress</span>
+            <span class="badge">Progresso no Navegador</span>
+          </div>
+          <a href="curso_api_testing.html" class="btn"
+            >Acessar Curso de API →</a
+          >
+        </div>
+      </div>
+
+      <div class="footer">Hospedado via GitHub Pages · Versão 1.1.0</div>
+    </div>
+  </body>
+</html>
